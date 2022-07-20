@@ -12,6 +12,9 @@ import {
   RadioStationLiveInfoComponent
 } from './components'
 
+import { UrlService } from './services'
+import { WINDOW_PROVIDERS } from './tokens'
+
 import { initializeAppFactory } from './utils'
 
 const COMPONENTS = [
@@ -32,10 +35,12 @@ const COMPONENTS = [
     AppRoutingModule
   ],
   providers: [
+    WINDOW_PROVIDERS,
+    UrlService,
     {
       provide: APP_INITIALIZER,
-      useFactory: () => initializeAppFactory,
-      deps: [],
+      useFactory: initializeAppFactory,
+      deps: [UrlService],
       multi: true
     }
   ],
