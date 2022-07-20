@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { APP_INITIALIZER, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -10,6 +10,8 @@ import {
   RadioStationsSidebarNavComponent,
   RadioStationLiveInfoComponent
 } from './components'
+
+import { initializeAppFactory } from './utils'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,14 @@ import {
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => initializeAppFactory,
+      deps: [],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: $bg-color;
-  color: $primary-text-color;
+  background-color: var(--bg-color);
+  color: var(--primaryTextColor);
   margin: 0;
 }
 
