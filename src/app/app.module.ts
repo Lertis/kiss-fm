@@ -4,9 +4,20 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
+import {
+  RadioIconsHeaderComponent,
+  RadioPlayerHeaderComponent,
+  RadioStationsSidebarNavComponent,
+  RadioStationLiveInfoComponent
+} from './components'
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RadioIconsHeaderComponent,
+    RadioPlayerHeaderComponent,
+    RadioStationsSidebarNavComponent,
+    RadioStationLiveInfoComponent
   ],
   imports: [
     BrowserModule,
