@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http'
 import { APP_INITIALIZER, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { Router } from '@angular/router'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -17,7 +18,7 @@ import { UrlService } from './services'
 import { SongsService } from './services/facades'
 import { BASE_URL, BASE_URL_TOKEN, WINDOW_PROVIDERS } from './tokens'
 
-import { initializeAppFactory } from './utils'
+import { initializeAppFactoryDefineDynamicRoutes, initializeAppFactoryStylingVariables } from './utils'
 
 const COMPONENTS = [
   MainWrapperComponent,
@@ -43,8 +44,14 @@ const COMPONENTS = [
     SongsService,
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeAppFactory,
+      useFactory: initializeAppFactoryStylingVariables,
       deps: [UrlService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactoryDefineDynamicRoutes,
+      deps: [SongsService, Router],
       multi: true
     },
     {

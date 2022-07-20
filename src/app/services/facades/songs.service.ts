@@ -11,7 +11,7 @@ export class SongsService {
     @Inject(BASE_URL_TOKEN) private readonly url: string,
     @Inject(API_SERVICE) private readonly api: IApiService) { }
 
-  getSongsOnOtherStations (): Observable<IRadioStationsSongs> {
-    return this.api.getRequest<IRadioStationsSongs>(`${this.url}/radioPremSongs`);
+  getSongsOnOtherStations (): Observable<IRadioStationsSongs[]> {
+    return this.api.getRequest<IRadioStationsSongs[]>(`${this.url}/radioPremSongs`);
   }
 }
