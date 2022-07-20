@@ -1,0 +1,40 @@
+.main-wrapper {
+  height: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: [col1-start] 310px [col2-start] auto;
+  grid-template-rows: [row1-start] 40px [row2-start] 110px [row3-end];
+}
+
+.header {
+  height: 150px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: [row1-start] 40px [row2-start] 110px [row3-end];
+  grid-column: col1-start / col2-end;
+}
+
+.header-icons {
+  height: 40px;
+}
+
+.header-player {
+  height: 110px;
+}
+
+.aside {
+  grid-column: col1-start;
+  grid-row: row3-start/row3-end;
+  height: fit-content;
+}
+
+.main {
+  grid-column: col2-start;
+  grid-row: row3-start/row3-end;
+  height: fit-content;
+}
+
+.box {
+  background-color: #444;
+  padding: 10px;
+}
