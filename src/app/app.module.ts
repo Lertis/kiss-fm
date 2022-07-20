@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
 import {
+  MainWrapperComponent,
   RadioIconsHeaderComponent,
   RadioPlayerHeaderComponent,
   RadioStationsSidebarNavComponent,
@@ -13,13 +14,18 @@ import {
 
 import { initializeAppFactory } from './utils'
 
+const COMPONENTS = [
+  MainWrapperComponent,
+  RadioIconsHeaderComponent,
+  RadioPlayerHeaderComponent,
+  RadioStationsSidebarNavComponent,
+  RadioStationLiveInfoComponent
+]
+
 @NgModule({
   declarations: [
     AppComponent,
-    RadioIconsHeaderComponent,
-    RadioPlayerHeaderComponent,
-    RadioStationsSidebarNavComponent,
-    RadioStationLiveInfoComponent
+    ...COMPONENTS
   ],
   imports: [
     BrowserModule,
