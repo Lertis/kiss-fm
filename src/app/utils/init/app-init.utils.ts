@@ -1,14 +1,17 @@
 import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
 
 import { concatMap, Observable, of, tap } from 'rxjs'
+
+import { AppState } from '../../store/state'
 
 import { RadioStationLiveInfoComponent } from '../../components'
 import { UrlService } from '../../services'
 import { SongsService } from '../../services/facades'
 import { rootVariables } from '../styling'
-import { IRadioStationsSongs, IRootVariables } from '../../models'
+import { IRadioStationsSong, IRootVariables } from '../../models'
 import { mock } from '../../mock'
-
+import { storeSongs } from '../../store/actions'
 
 export function initializeAppFactoryStylingVariables (urlService: UrlService): () => Observable<IRootVariables> {
   return () => urlService.getHostName().pipe(
@@ -17,9 +20,11 @@ export function initializeAppFactoryStylingVariables (urlService: UrlService): (
   )
 }
 
-export function initializeAppFactoryDefineDynamicRoutes (songsService: SongsService, router: Router): () => void {
+export function initializeAppFactoryDefineDynamicRoutes (songsService: SongsService, router: Router, store: Store<AppState>): () => void {
   return () => songsService.getSongsOnOtherStations().pipe(
-    tap((songs: IRadioStationsSongs[]) => {
+    tap((songs: IRadioStationsSong[]) => {
+      console.log(songs)
+      store.dispatch(storeSongs({ songs }))
       const component = RadioStationLiveInfoComponent
       songs.forEach(song => router.config.push({ path: song.type, component }))
     })

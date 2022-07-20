@@ -1,4 +1,4 @@
-export interface IRadioStationsSongs {
+export interface IRadioStationsSong {
   cover: string
   singer: string
   song: string

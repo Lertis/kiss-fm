@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core'
 import { mergeMap, Subject, takeUntil } from 'rxjs'
-import { IRadioStationsSongs } from '../../models'
+import { IRadioStationsSong } from '../../models'
 
 import { pollingObservable } from '../../operators'
 import { SongsService } from '../../services/facades'
@@ -16,7 +16,7 @@ import { cloneDeep } from 'lodash'
 export class MainWrapperComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
 
-  songs!: IRadioStationsSongs[]
+  songs!: IRadioStationsSong[]
 
   constructor (
     private readonly songsService: SongsService,

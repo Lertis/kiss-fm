@@ -3,6 +3,11 @@ import { APP_INITIALIZER, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 
+import { Store, StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { reducers } from './store/reducers'
+
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
@@ -16,9 +21,14 @@ import {
 
 import { UrlService } from './services'
 import { SongsService } from './services/facades'
+import { SongsEffects } from './store/effects/radio'
+
 import { BASE_URL, BASE_URL_TOKEN, WINDOW_PROVIDERS } from './tokens'
 
 import { initializeAppFactoryDefineDynamicRoutes, initializeAppFactoryStylingVariables } from './utils'
+
+import { environment } from '../environments/environment'
+
 
 const COMPONENTS = [
   MainWrapperComponent,
@@ -36,7 +46,9 @@ const COMPONENTS = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    EffectsModule.forRoot([SongsEffects]),
+    StoreModule.forRoot(reducers), environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [
     WINDOW_PROVIDERS,
@@ -51,7 +63,7 @@ const COMPONENTS = [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeAppFactoryDefineDynamicRoutes,
-      deps: [SongsService, Router],
+      deps: [SongsService, Router, Store],
       multi: true
     },
     {
