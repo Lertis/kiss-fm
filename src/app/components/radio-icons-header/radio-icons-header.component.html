@@ -1,1 +1,5 @@
-<p>radio-icons-header works!</p>
+<div class="header-icons-wrapper">
+  <ng-container *ngFor="let radio of radios">
+    <img class="radio-icon" [alt]="radio.name" [src]="radio.path">
+  </ng-container>
+</div>

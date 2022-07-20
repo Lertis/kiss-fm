@@ -1,0 +1,14 @@
+.header-icons-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 2em;
+  & > * {
+    flex: 1;
+    cursor: pointer;
+  }
+  .radio-icon {
+    height: 40px;
+  }
+}
