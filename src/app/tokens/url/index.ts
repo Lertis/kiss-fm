@@ -1,1 +1,1 @@
-export * from './window'
+export * from './base-url'
