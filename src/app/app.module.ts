@@ -6,7 +6,8 @@ import { Router } from '@angular/router'
 import { Store, StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { reducers } from './store/reducers'
+
+import { reducers, SongsEffects } from './store'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -21,7 +22,6 @@ import {
 
 import { UrlService } from './services'
 import { SongsService } from './services/facades'
-import { SongsEffects } from './store/effects/radio'
 
 import { BASE_URL, BASE_URL_TOKEN, WINDOW_PROVIDERS } from './tokens'
 

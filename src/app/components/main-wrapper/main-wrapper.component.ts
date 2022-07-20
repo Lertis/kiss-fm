@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core'
+import { Store } from '@ngrx/store'
+
 import { mergeMap, Subject, takeUntil } from 'rxjs'
-import { IRadioStationsSong } from '../../models'
-
-import { pollingObservable } from '../../operators'
-import { SongsService } from '../../services/facades'
-
 import { cloneDeep } from 'lodash'
+
+import { IRadioStationsSong } from '../../models'
+import { pollingObservable } from '../../operators'
+import { selectSongs, AppState } from '../../store'
+
 
 @Component({
   selector: 'radio-main-wrapper',
@@ -19,15 +21,15 @@ export class MainWrapperComponent implements OnDestroy {
   songs!: IRadioStationsSong[]
 
   constructor (
-    private readonly songsService: SongsService,
-    private readonly cdr: ChangeDetectorRef) {
+    private readonly cdr: ChangeDetectorRef,
+    private readonly store: Store<AppState>) {
     this.startGettingSongsOnOtherStations()
   }
 
   private startGettingSongsOnOtherStations () {
     pollingObservable({ pollingTime: 20000 }).pipe(
       takeUntil(this.destroy$),
-      mergeMap(() => this.songsService.getSongsOnOtherStations())
+      mergeMap(() => this.store.select(selectSongs))
     ).subscribe(songs => {
       this.songs = cloneDeep(songs)
       this.cdr.detectChanges()
